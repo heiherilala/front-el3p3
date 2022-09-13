@@ -1,7 +1,14 @@
 import React from 'react';
+import { activeBack } from '../constants';
 import { importedObject } from '../interfaces';
 
-const MarqFace = (data:importedObject[],faceActive:number | null,setFaceActive:React.Dispatch<React.SetStateAction<number | null>>) => {
+const MarqFace = (
+    data:importedObject[],
+    faceActive:number | null,
+    setFaceActive:React.Dispatch<React.SetStateAction<(number | null)[]>>,
+    keyId:number,
+    actualisation:()=>void
+    ) => {
     if (faceActive==null) {
         return (
             <>
@@ -15,7 +22,12 @@ const MarqFace = (data:importedObject[],faceActive:number | null,setFaceActive:R
                                 left: "calc("+donne.BoundingBox.Left+"% * 100)" ,
                             }
                         } onClick={
-                            ()=>{setFaceActive(key)}
+                            ()=>{
+                                const newValue = activeBack;
+                                newValue[keyId]=key;
+                                setFaceActive(newValue)
+                                actualisation()
+                            }
                         }>
                             {key}
                         </div>
@@ -38,7 +50,12 @@ const MarqFace = (data:importedObject[],faceActive:number | null,setFaceActive:R
                                     left: "calc("+donne.BoundingBox.Left+"% * 100)" ,
                                 }
                             } onClick={
-                                ()=>{setFaceActive(key)}
+                                ()=>{
+                                    const newValue = activeBack;
+                                    newValue[keyId]=key;
+                                    setFaceActive(newValue);
+                                    actualisation();
+                                }
                             }>
                                 {key}
                             </div>
@@ -53,7 +70,12 @@ const MarqFace = (data:importedObject[],faceActive:number | null,setFaceActive:R
                                     left: "calc("+donne.BoundingBox.Left+"% * 100)" ,
                                 }
                             } onClick={
-                                ()=>{setFaceActive(key)}
+                                ()=>{
+                                    const newValue = activeBack;
+                                    newValue[keyId]=key;
+                                    setFaceActive(newValue);
+                                    actualisation();
+                                }
                             }>
                                 {key}
                             </div>

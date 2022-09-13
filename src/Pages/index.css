@@ -142,4 +142,9 @@ body>div{
 
   }
 
+
+  .imageSize{
+    width: 60vw !important;
+  }
+
   .col{background-color: aquamarine;}

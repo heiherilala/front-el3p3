@@ -5,7 +5,9 @@ export const variant: string = "info";
 export const APIUrl: string = "https://hackaton3-library.herokuapp.com";
 export const ProjectUrl: string = "http://localhost:3000";
 export const backgroundColor: string = "bg-"+variant;
-
+export const activeBack: (number|null)[] = [
+    null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+];
 
 
 

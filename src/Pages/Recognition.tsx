@@ -1,9 +1,9 @@
-import { Discovery, ImportExport } from 'aws-sdk';
+import { Discovery, ImportExport, Kafka } from 'aws-sdk';
 import React, { useEffect, useRef, useState } from 'react';
 import AwsGet from '../ancien/AwsGet';
 import ChooseFace from '../Components/ChooseFace';
 import DataFace from '../Components/DataFace';
-import { baba, ProjectUrl } from '../constants';
+import { activeBack, baba, ProjectUrl } from '../constants';
 import { img, importedObject } from '../interfaces';
 import Loading from '../Components/Loading';
 import MarqFace from '../Components/MarqFace';
@@ -23,9 +23,10 @@ const Recognition = () => {
     const [preview, setPreview] = useState<img[]>([]);
     const [count, setCount] = useState<number>(0);
     const [awsResponsee, setAwsResponsee] = useState<importedObject[]>([baba]);
+    const [awsResponseeList, setAwsResponseeList] = useState<importedObject[][]>([]);
     const fielInputRef = useRef<HTMLInputElement|null>(null);
     const [oneString, setOneString] = useState<string>("not modified");
-    const [faceActive, setFaceActive] = useState<number|null>(null);
+    const [faceActive, setFaceActive] = useState<(number|null)[]>(activeBack);
     const [loadingCheck, setLoadingCheck] = useState<boolean>(false);
     const [smallLoad,setSmallLoad] = useState<boolean>(true);
     
@@ -78,18 +79,15 @@ const Recognition = () => {
         const newValue:img[]=preview;
 
         if (preview.length==0) {
-            newValue.push(tempFileList);
-            setPreview(newValue);    
+            newValue.push(tempFileList);  
             newValue.push(tempFileList);
             setPreview(newValue);  
         }else{
             newValue.push(tempFileList);
             setPreview(newValue);  
         }
-
-        setSmallLoad(false);
-        const timer = setInterval(()=>{setSmallLoad(true);clearInterval(timer)},1000)
         console.log(preview);
+        actualisData();
         analyze(preview.length-1);
         }
       };
@@ -100,6 +98,11 @@ const Recognition = () => {
         
         if ((awsResponsee[0]==baba)) {
             setLoadingCheck(true)
+        }else{
+            const newAwsAdd:importedObject[][] = awsResponseeList;
+            newAwsAdd.push(awsResponsee);
+            setAwsResponseeList(newAwsAdd);
+            actualisData();
         }
       },[awsResponsee]);
 
@@ -110,9 +113,19 @@ const Recognition = () => {
         setIndex(selectedIndex);
       };
 
+        const actualisData:()=>void=()=>{
+            setSmallLoad(false);
+            console.log("ffffffffffffffffffffffffffffffffffffffffffff");
+            console.log(faceActive);
+            
+            const timer = setInterval(()=>{setSmallLoad(true);clearInterval(timer)},50)
+        }
 
-
-
+    useEffect(
+        ()=>{
+            actualisData();
+        },[awsResponseeList,faceActive]
+    )
 
 
 
@@ -141,95 +154,116 @@ const Recognition = () => {
             <h1 className="headerPage text-success">
                 Facial recognition with AWS
             </h1>
-            <div className="d-flex flex-column justify-content-center align-items-center">
-                <div className="image-contener d-flex flex-column justify-content-center align-items-center">
-                    {preview.length==0?
-                        <button className='btn btn-outline-secondary activBouton ' onClick={
-                            (e)=>{
-                                e.preventDefault();
-                                fielInputRef.current?.click()
-                            }
-                        }>Add image</button>
-                    :
-                        <button className='btn btn-outline-secondary nonActivBouton' onClick={
-                            (e)=>{
-                                e.preventDefault();
-                                fielInputRef.current?.click()
-                            }
-                        }>Another image</button>
-                    }
+
+            {!smallLoad?<></>:<>
+
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                    <div className="image-contener d-flex flex-column justify-content-center align-items-center">
+                        {preview.length==0?
+                            <button className='btn btn-outline-secondary activBouton ' onClick={
+                                (e)=>{
+                                    e.preventDefault();
+                                    fielInputRef.current?.click()
+                                }
+                            }>Add image</button>
+                        :
+                            <button className='btn btn-outline-secondary nonActivBouton' onClick={
+                                (e)=>{
+                                    e.preventDefault();
+                                    fielInputRef.current?.click()
+                                }
+                            }>Another image</button>
+                        }
 
 
-                    <input 
-                    style={{display:"none"}}
-                    type="file" 
-                    accept='image/*'
-                    ref={fielInputRef}
-                    onChange={takingImage}/>
-                    {preview.length==1?<></>:!smallLoad?<></>:
-                        <Carousel activeIndex={index} onSelect={handleSelect}>
-                            <Carousel.Item key={""+0}>
-                                <img className='d-block w-100' src={preview[0]?.base64String} alt={preview[0]?.fileName} onClick={
-                                    (e)=>{
-                                        //e.preventDefault();
-                                        //fielInputRef.current?.click();
-                                    }
-                                }></img>
-                                    {MarqFace(awsResponsee,faceActive,setFaceActive)}
-                                    <Carousel.Caption>
-                                        <h3>First slide label</h3>
-                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                    </Carousel.Caption>
-                            </Carousel.Item>
-                                {(preview.slice(2)).map((donne,keyId)=>(
-                                    <Carousel.Item key={""+donne.base64String}>
-                                        <img className='d-block w-100' src={preview[keyId+2]?.base64String} alt={preview[keyId+2]?.fileName} onClick={
-                                            (e)=>{
-                                                //e.preventDefault();
-                                                //fielInputRef.current?.click();
-                                            }
-                                        }></img>
-                                            {MarqFace(awsResponsee,faceActive,setFaceActive)}
-                                            <Carousel.Caption>
-                                                <h3>{"N°"+keyId}</h3>
-                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                            </Carousel.Caption>
-                                    </Carousel.Item>
-                                ))}
+                        <input 
+                        style={{display:"none"}}
+                        type="file" 
+                        accept='image/*'
+                        ref={fielInputRef}
+                        onChange={takingImage}/>
+                        {preview.length<2?<></>:
+                            <Carousel activeIndex={index} onSelect={handleSelect} slide={false} wrap={false} interval={null}>
+                                <Carousel.Item key={""+0}>
+                                    <img className='d-block w-100 imageSize' src={preview[0]?.base64String} alt={preview[0]?.fileName} onClick={
+                                        (e)=>{
+                                            //e.preventDefault();
+                                            //fielInputRef.current?.click();
+                                        }
+                                    }></img>
+                                        {(awsResponseeList[0]==null)||(awsResponseeList[0]==undefined)?MarqFace(awsResponsee,faceActive[0],setFaceActive,0,actualisData): MarqFace(awsResponseeList[0],faceActive[0],setFaceActive,0,actualisData)}
+                                        <Carousel.Caption>
+                                            <h3>First slide label</h3>
+                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                        </Carousel.Caption>
+                                </Carousel.Item>
+                                    {(preview.slice(2)).map((donne,keyId)=>(
+                                        <Carousel.Item key={""+donne.base64String}>
+                                            <img className='d-block w-100 imageSize' src={preview[keyId+2]?.base64String} alt={preview[keyId+2]?.fileName} onClick={
+                                                (e)=>{
+                                                    //e.preventDefault();
+                                                    //fielInputRef.current?.click();
+                                                }
+                                            }></img>
+                                                {(awsResponseeList[keyId+1]==null)||(awsResponseeList[keyId+1]==undefined)?MarqFace(awsResponsee,faceActive[keyId+1],setFaceActive,(keyId+1),actualisData): MarqFace(awsResponseeList[keyId+1],faceActive[keyId+1],setFaceActive,(keyId+1),actualisData)}
+                                                <Carousel.Caption>
+                                                    <h3>{"N°"+keyId}</h3>
+                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                                </Carousel.Caption>
+                                        </Carousel.Item>
+                                    ))}
 
-                            <Carousel.Item key={""+0}>
-                                <img className='d-block w-100' src={addImage} alt={preview[0]?.fileName} onClick={
-                                    (e)=>{
-                                        //e.preventDefault();
-                                        //fielInputRef.current?.click();
-                                    }
-                                }></img>
-                                    {MarqFace(awsResponsee,faceActive,setFaceActive)}
-                                    <Carousel.Caption>
-                                        <h3>First slide label</h3>
-                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                    </Carousel.Caption>
-                            </Carousel.Item>
+                                <Carousel.Item key={""+0}>
+                                    <img className='d-block w-100 imageSize' src={addImage} alt={preview[0]?.fileName} onClick={
+                                        (e)=>{
+                                            e.preventDefault();
+                                            fielInputRef.current?.click();
+                                        }
+                                    }></img>
+                                        <Carousel.Caption>
+                                            <h3>First slide label</h3>
+                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                        </Carousel.Caption>
+                                </Carousel.Item>
 
-                        </Carousel>}
+                            </Carousel>}
+                    </div>
+
+
+
+
+
+
+                    <div className="donnePage">
+                    
+                        {
+                            preview.length==0?<></>:(loadingCheck?Loading(()=>{setLoadingCheck(false)}):(
+                                    awsResponseeList.map(
+                                        (data,key)=>
+                                        (
+                                            <>
+                                                {ChooseFace(data,faceActive[key],setFaceActive,key,actualisData)}
+                                            </>
+                                        )
+                                    )
+                                ))
+                        }
+                        {
+                            preview.length==0?<></>:(loadingCheck?Loading(()=>{setLoadingCheck(false)}):(
+                                awsResponseeList.map((data,key)=>{
+                                    const number:number|null = faceActive[key];
+                                    return(
+                                        <>
+                                            {number==null?<div></div>:DataFace(awsResponseeList[key][number])}
+                                        </>
+                                    )
+                                })
+                            ))
+                        }
+                    </div>
                 </div>
-
-                <AwsGet imageData={image} resultat={setAwsResponsee} count={count} setLoadingCheck={setLoadingCheck}/>
-
-
-
-
-                <div className="donnePage">
-                
-                    {
-                        preview.length==0?<></>:(loadingCheck?Loading(()=>{setLoadingCheck(false)}):(ChooseFace(awsResponsee,faceActive,setFaceActive)))
-                    }
-                    {
-                        (faceActive==null?<div></div>:DataFace(awsResponsee[faceActive]))
-                    }
-                </div>
-                
-            </div>
+            </>}
+            <AwsGet imageData={image} resultat={setAwsResponsee} count={count} setLoadingCheck={setLoadingCheck} />
         </div>
     );
 };

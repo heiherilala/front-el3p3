@@ -11,6 +11,7 @@ import Recognition from './Pages/Recognition';
 import Login from './Pages/Login';
 import NavbarHeader from './Components/NavbarHeader';
 import { ProjectUrl } from './constants';
+import NewEvent from './Pages/NewEvent';
 
 function App() {
   return (
@@ -41,7 +42,13 @@ function App() {
                       </>
                     }
                 />
-
+                <Route path="/new-event" 
+                    element={
+                      <>
+                          {NewEvent()}
+                      </>
+                    }
+                />
 
 
 

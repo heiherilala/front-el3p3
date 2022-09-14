@@ -505,23 +505,12 @@ footer p {
   margin-top: 4em;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .sizimg {
   height: 8em !important;
 }
 
 .sizimg2 {
-  background-color: #eee;
+  background-color: rgb(216, 195, 195);
 }
 
 .gradient-custom-2 {
@@ -542,4 +531,4 @@ footer p {
     border-top-right-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
   }
-}/*# sourceMappingURL=main.css.map */
+}

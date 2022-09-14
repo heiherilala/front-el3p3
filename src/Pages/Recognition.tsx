@@ -11,6 +11,7 @@ import './index.css';
 import NavbarHeader from '../Components/NavbarHeader';
 import { Carousel } from 'react-bootstrap';
 import addImage from './add-imag2.png'
+import Footer from '../Components/Footer';
 
 
 
@@ -135,20 +136,14 @@ const Recognition = () => {
 
 
     return (
-        <div>
-        {NavbarHeader(
-            [
-                {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                {name:"Listes des candicatures",href: (ProjectUrl + "/application")}
-            ],
-            {name:"Offre d’emploi",href: (ProjectUrl + "/")}
-
-        )}
-
-
-
-
-
+        <>
+            {NavbarHeader(
+                [
+                    {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
+                    {name:"Listes des candicatures",href: (ProjectUrl + "/application")}
+                ],
+                {name:"Offre d’emploi",href: (ProjectUrl + "/")}
+            )}
 
 
             <h1 className="headerPage text-success">
@@ -264,7 +259,8 @@ const Recognition = () => {
                 </div>
             </>}
             <AwsGet imageData={image} resultat={setAwsResponsee} count={count} setLoadingCheck={setLoadingCheck} />
-        </div>
+            <Footer/>
+        </>
     );
 };
 

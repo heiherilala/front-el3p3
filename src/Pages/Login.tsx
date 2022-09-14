@@ -42,51 +42,76 @@ import { login } from '../hoooks';
     })
   }
 
-  
-
-
-  
-  
-  
-
 
   return (
     <>
-        {
-        <div className="contereAllLoginb" style={{
-          backgroundImage: 'url('+background+')',
-          backgroundSize: "cover",
-          height: "100vh",
-        }}>
-            <div className='connexion'>
-              
+      <section className="h-100 gradient-form sizimg2">
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-xl-10">
+              <div className="card rounded-3 text-black">
+                <div className="row g-0">
+                  <div className="col-lg-6">
+                    <div className="card-body p-md-5 mx-md-4">
 
-              <div className='titleLoging'><h2>{"Se connecter"}</h2></div>
-              <Form className="contereLoginb container" >
-                  <Form.Group className="row " controlId="formBasicText">
-                      <Form.Label htmlFor="username" className="col-3 attribut_input">Identifiant: </Form.Label>
-                      <Form.Control name="username" className="col-6 custom_color_input" type="text" 
-                      placeholder="Entrer l'Identifiant"  value={username} onChange={(e)=>{setUsername(e.target.value)} }/>
-                  </Form.Group>
+                      <div className="text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                          alt="logo" className=' sizimg'/>
+                        <h4 className="mt-1 mb-5 pb-1">{"Se connecter"}</h4>
+                      </div>
 
-                  <Form.Group className="row " controlId="formBasicPassword">
-                      <Form.Label htmlFor="password" className="col-3 attribut_input">Mot de passe: </Form.Label>
-                      <Form.Control name="password" className="col-6 custom_color_input" type="password" 
-                      placeholder="Entrer le Mot de passe" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                  </Form.Group>
+                      <Form>
 
+                        <Form.Group className="form-outline mb-4">
 
-                  <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
-                      <div className="col-3"></div>
-                      <Button className="col-6 custom_color" onClick={(e)=>{functionLog(username, password)}}>
-                          CONNEXION
-                      </Button>
-                      <div className="col-3"></div>
-                  </Form.Group>
-              </Form>
+                          <Form.Control 
+                            className="form-control"
+                            name="username"  type="text" 
+                            placeholder="Entrer l'Identifiant"  
+                            value={username} 
+                            onChange={(e)=>{setUsername(e.target.value)} }
+                          />
+                          <Form.Label className="form-label" 
+                              htmlFor="username" 
+                          >Identifiant</Form.Label>
+                        </Form.Group>
+
+                        <Form.Group className="form-outline mb-4">
+
+                          <Form.Control 
+                            name="password"  type="password" 
+                            placeholder="Entrer le Mot de passe" 
+                            value={password} 
+                            onChange={(e)=>{setPassword(e.target.value)}}
+                            className="form-control" />
+                          <Form.Label className="form-label" 
+                              htmlFor="password" 
+                            >Mot de passe: </Form.Label>
+                          </Form.Group>
+                        <Form.Group className="text-center pt-1 mb-5 pb-1">
+                          <Button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"  onClick={(e)=>{functionLog(username, password)}}>CONNEXION</Button>
+                        </Form.Group>
+
+                      </Form>
+
+                    </div>
+                  </div>
+                  <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
+                    <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+                      <h4 className="mb-4">We are more than just a company</h4>
+                      <p className="small mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        }
+      </section>
     </>
   );
 }

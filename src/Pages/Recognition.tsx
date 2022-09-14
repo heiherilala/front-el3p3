@@ -152,7 +152,7 @@ const Recognition = () => {
 
             {!smallLoad?<></>:<>
 
-                <div className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex flex-column justify-content-center align-items-center contenerRecognition">
                     <div className="image-contener d-flex flex-column justify-content-center align-items-center">
                         {preview.length==0?
                             <button className='btn btn-outline-secondary activBouton ' onClick={

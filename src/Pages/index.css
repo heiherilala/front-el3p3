@@ -129,8 +129,8 @@
     cursor: pointer;
   }
 
-  .carousel-control-prev, .carousel-control-next, .carousel-indicators{
-    background-color: brown !important;
+  .carousel-control-prev, .carousel-control-next{
+    background-color: rgba(165, 122, 42, 0.664) !important;
 
   }
 
@@ -138,7 +138,13 @@
 
   .col{background-color: aquamarine;}
 
+  .carousel-indicators li{
+    border: #643a0bcc solid 0.5em;
+  }
 
+  .carousel-caption{
+    text-shadow: 0px 0px 25px #201202, 0px 0px 25px #201202, 0px 0px 25px #201202;
+  }
 
 
 @media screen and (max-width: 800px) {
@@ -150,3 +156,4 @@
     width: 90vw !important;
   }
 }
+

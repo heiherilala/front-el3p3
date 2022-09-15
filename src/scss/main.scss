@@ -1,5 +1,13 @@
 @import './variable.scss';
 
+#root body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 
 /* star real css*/
 .marging-top{
@@ -234,10 +242,16 @@ footer a,
   }
   
 
+  .form-group p{
+    color: #d8363a;
+  }
+  .bigWith{
+    width: 50%;
+  }
 
-
-
-
+  .transparant{
+    background-color: #ffffff00 !important;
+  }
 
   .gradient-custom-2 {
     /* fallback for old browsers */
@@ -260,4 +274,10 @@ footer a,
     border-top-right-radius: .3rem;
     border-bottom-right-radius: .3rem;
     }
+    }
+
+
+    /*--------------------------------footer*/
+    .footer, .footer div{
+      background-color: #ffffff00 !important;
     }

@@ -3,10 +3,10 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer id="footer">
-            <div className="container">
-                <div className="row">
-                        <div className="col">
-                            <div className="footer-info">
+            <div className="container transparant">
+                <div className="row transparant">
+                        <div className="col transparant">
+                            <div className="footer-info transparant">
                                 <div className="footer-content"><p> Entreprise de recrutement</p></div>
                                 <div className="copyright-text"> 
                                     <p > &copy; HEI - SARLU</p>                                

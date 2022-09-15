@@ -33,7 +33,7 @@ const NavbarHeader = (navList:{name:string,href:string}[],title:{name:string,hre
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light nav_perso">
+            <nav className="navbar navbar-expand-lg navbar-light nav_perso ml-auto">
               <a className="navbar-brand" href={title.href}> {title.name} </a>
               <button 
                   className="navbar-toggler"

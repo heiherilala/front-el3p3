@@ -16,50 +16,33 @@ import NewEvent from './Pages/NewEvent';
 function App() {
   return (
     <>
-      
-
-
-      <head>
-
-      </head>
-
-
-
-      <body>
           <BrowserRouter>
             <Routes>
               <Route path="/login" 
-                    element={
-                      <>
-                          {Login()}
-                      </>
-                    }
-                />
-                <Route path="/" 
-                    element={
-                      <>
-                          {Recognition()}
-                      </>
-                    }
-                />
-                <Route path="/new-event" 
-                    element={
-                      <>
-                          {NewEvent()}
-                      </>
-                    }
-                />
-
-
-
+                  element={
+                    <>
+                        {Login()}
+                    </>
+                  }
+              />
+              <Route path="/" 
+                  element={
+                    <>
+                        {Recognition()}
+                    </>
+                  }
+              />
+              <Route path="/new-event" 
+                  element={
+                    <>
+                        {NewEvent()}
+                    </>
+                  }
+              />
 
             </Routes>
 
           </BrowserRouter>
-        </body>
-
-
-
     </>
   );
 }

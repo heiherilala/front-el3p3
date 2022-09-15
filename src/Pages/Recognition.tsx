@@ -10,7 +10,7 @@ import MarqFace from '../Components/MarqFace';
 import './index.css';
 import NavbarHeader from '../Components/NavbarHeader';
 import { Carousel } from 'react-bootstrap';
-import addImage from './add-imag2.png'
+import addImage from '../assets/images/addImag2.png';
 import Footer from '../Components/Footer';
 
 
@@ -189,7 +189,6 @@ const Recognition = () => {
                                         {(awsResponseeList[0]==null)||(awsResponseeList[0]==undefined)?MarqFace(awsResponsee,faceActive[0],setFaceActive,0,actualisData): MarqFace(awsResponseeList[0],faceActive[0],setFaceActive,0,actualisData)}
                                         <Carousel.Caption>
                                             <h3>First slide label</h3>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                         </Carousel.Caption>
                                 </Carousel.Item>
                                     {(preview.slice(2)).map((donne,keyId)=>(
@@ -203,7 +202,6 @@ const Recognition = () => {
                                                 {(awsResponseeList[keyId+1]==null)||(awsResponseeList[keyId+1]==undefined)?MarqFace(awsResponsee,faceActive[keyId+1],setFaceActive,(keyId+1),actualisData): MarqFace(awsResponseeList[keyId+1],faceActive[keyId+1],setFaceActive,(keyId+1),actualisData)}
                                                 <Carousel.Caption>
                                                     <h3>{"N°"+keyId}</h3>
-                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                                 </Carousel.Caption>
                                         </Carousel.Item>
                                     ))}
@@ -216,8 +214,7 @@ const Recognition = () => {
                                         }
                                     }></img>
                                         <Carousel.Caption>
-                                            <h3>First slide label</h3>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            <></>
                                         </Carousel.Caption>
                                 </Carousel.Item>
 

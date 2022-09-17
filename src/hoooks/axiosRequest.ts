@@ -13,24 +13,38 @@ const instance = axios.create({
 export const postPutDeletRequest = (
   endPoint:string,
   body:any,
-  id:number|null,
+  id:number|string|null,
   post:boolean,
   put:boolean,
   functionIfTrue:(()=>void)|null, 
   functionIfFalse:(()=>void)|null,
   token:string|undefined,
+  changeError:React.Dispatch<React.SetStateAction<string>>|null,
   )=>{
     if (token==undefined) {
       axios[post?"post":put?"put":"delete"](APIUrl+endPoint+(id==null?"":"/"+id), body)
       .then(
-        ()=>{
+        (response)=>{
+
+
+          console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+          console.log(response);
+          
           if (functionIfTrue!=null) {
             functionIfTrue()
           }
-          ;}
+          ;
+        
+        
+        
+        }
       )
       .catch(
         (e)=>{
+          console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          if (changeError!=null) {
+            changeError("c'est modifiet")
+          }
           if (functionIfFalse!=null) {
             functionIfFalse()
           }
@@ -39,14 +53,22 @@ export const postPutDeletRequest = (
     }else {
       axios[post?"post":put?"put":"delete"](APIUrl+endPoint+(id==null?"":"/"+id), body, {headers: {'Authorization': 'Bearer ' + token}})
       .then(
-        ()=>{
+        (response)=>{
+          console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+          console.log(response);
           if (functionIfTrue!=null) {
             functionIfTrue()
           }
           ;}
       )
       .catch(
+        
         (e)=>{
+          console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          console.log(e);
+          if (changeError!=null) {
+            changeError("c'est modifiet")
+          }
           if (functionIfFalse!=null) {
             functionIfFalse()
           }

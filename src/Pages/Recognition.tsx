@@ -129,8 +129,12 @@ const Recognition = () => {
     )
 
 
+const accepted = ()=>{
 
+}
+const anuled = ()=>{
 
+}
 
 
 
@@ -139,15 +143,14 @@ const Recognition = () => {
         <>
             {NavbarHeader(
                 [
-                    {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                    {name:"Listes des candicatures",href: (ProjectUrl + "/application")}
+                    
                 ],
-                {name:"Offre d’emploi",href: (ProjectUrl + "/")}
+                {name:"",href: (ProjectUrl + "/")}
             )}
 
 
             <h1 className="headerPage text-success">
-                Facial recognition with AWS
+                Apelle par reconnaissance faciale
             </h1>
 
             {!smallLoad?<></>:<>
@@ -160,14 +163,14 @@ const Recognition = () => {
                                     e.preventDefault();
                                     fielInputRef.current?.click()
                                 }
-                            }>Add image</button>
+                            }>ajouter une image</button>
                         :
                             <button className='btn btn-outline-secondary nonActivBouton' onClick={
                                 (e)=>{
                                     e.preventDefault();
                                     fielInputRef.current?.click()
                                 }
-                            }>Another image</button>
+                            }>Une autre image</button>
                         }
 
 
@@ -241,7 +244,7 @@ const Recognition = () => {
                                 ))
                         }
                         {
-                            preview.length==0?<></>:(loadingCheck?Loading(()=>{setLoadingCheck(false)}):(
+                            preview.length==0?<></>:(loadingCheck?<></>:(
                                 awsResponseeList.map((data,key)=>{
                                     const number:number|null = faceActive[key];
                                     return(
@@ -252,10 +255,29 @@ const Recognition = () => {
                                 })
                             ))
                         }
+                        {
+                            preview.length==0?<></>:
+                            <div className="container">
+                                <div className='row'>
+                                    <div className="col-sm row justify-content-md-center">
+                                        <button className='btn btn-outline-secondary acceptBouton ' onClick={anuled}>
+                                            Anuler
+                                        </button>
+                                    </div>
+                                    <div className="col-sm row justify-content-md-center">
+                                        <button className='btn btn-outline-secondary acceptBouton ' onClick={accepted}>
+                                            Terminer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
                     </div>
                 </div>
             </>}
             <AwsGet imageData={image} resultat={setAwsResponsee} count={count} setLoadingCheck={setLoadingCheck} />
+
             <Footer/>
         </>
     );

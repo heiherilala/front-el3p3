@@ -11,7 +11,7 @@ const ChooseFace = (
     if (faceActive==null) {
         return(
             <>
-                <h2>Choose a face:</h2>
+                <h2>Voir le detail d'un eleve:</h2>
                 {data.map((donne, key)=>{
                     return(
                         <button type='button' className="chooseFace btn btn-primary" onClick={
@@ -43,7 +43,7 @@ const ChooseFace = (
                             actualisation();
                         }
                     }>
-                    {" Return to face selection "} 
+                    {" Revenir à la sélection "} 
                 </button>
             </div>
         )

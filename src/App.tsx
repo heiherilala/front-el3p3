@@ -12,20 +12,21 @@ import Login from './Pages/Login';
 import NavbarHeader from './Components/NavbarHeader';
 import { ProjectUrl } from './constants';
 import NewEvent from './Pages/NewEvent';
+import ModifyEvent from './Pages/ModifyEvent';
 
 function App() {
   return (
     <>
           <BrowserRouter>
             <Routes>
-              <Route path="/login" 
+              <Route path="/" 
                   element={
                     <>
                         {Login()}
                     </>
                   }
               />
-              <Route path="/" 
+              <Route path="/recognition" 
                   element={
                     <>
                         {Recognition()}
@@ -39,9 +40,15 @@ function App() {
                     </>
                   }
               />
-
+              <Route path="/modify-event" 
+                  element={
+                    <>
+                        {ModifyEvent()}
+                    </>
+                  }
+              />
             </Routes>
-
+            
           </BrowserRouter>
     </>
   );

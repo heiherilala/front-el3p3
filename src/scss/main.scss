@@ -108,14 +108,14 @@
   color: #ece4de;
   text-align: center;
 }
-footer a,
+
+  footer a,
   footer p {
     color: #b9b8b8;
   }
 
   .footer-content{
     margin-top: 1em;
-
   }
 
 
@@ -236,6 +236,10 @@ footer a,
   .sizimg {
     height: 8em !important;
   }
+  .sizimgNav{
+    height: 3em !important;
+    border: #252222 solid;
+  }
   
   .sizimg2 {
     background-color: rgb(255, 255, 255);
@@ -258,10 +262,10 @@ footer a,
     background: #fccb90;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    background: -webkit-linear-gradient(to right, #ee7724, #c59732, #ad902f, #452a52);
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    background: linear-gradient(to right, #ee7724, #c59732, #ad902f, #311629);
     }
     
     @media (min-width: 768px) {
@@ -280,4 +284,16 @@ footer a,
     /*--------------------------------footer*/
     .footer, .footer div{
       background-color: #ffffff00 !important;
+    }
+
+    h3{
+      margin-top: 3em !important;
+    }
+
+    .colorModel{
+      color:#fccb90 !important;
+    }
+
+    .custom_color_logout{
+      @include button-color-refused();
     }

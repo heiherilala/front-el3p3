@@ -7,6 +7,16 @@
     z-index: 90;
     margin: 2em;
 }
+
+.acceptBouton{
+  border-radius: 1em;
+  --whidht1: 10vw;
+  width: calc(var(--whidht1));
+  height: calc(var(--whidht1) * 0.7);
+  z-index: 90;
+  margin: 2em;
+}
+
 .nonActivBouton{
   border-radius: 1em;
   --whidht1: 30vw;

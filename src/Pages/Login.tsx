@@ -10,7 +10,7 @@ import { IUser } from '../interfaces';
 import { Field, useFormik } from "formik";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { login } from '../hoooks';
+import { axiosGget, login } from '../hoooks';
 import hei from '../assets/images/hei.png';
 
 
@@ -27,10 +27,11 @@ import hei from '../assets/images/hei.png';
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [token, setToken] = useState<string>("");
+    const [tokenUseur, setTokenUsern] = useState<any>();
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/");
+    window.location.href=(ProjectUrl+"/new-event");
   }
 
 
@@ -42,6 +43,17 @@ import hei from '../assets/images/hei.png';
     })
   }
 
+
+  const functionLogToken = () => {
+    
+    axiosGget('/whoami',token,setTokenUsern,()=>{},()=>{})
+    console.log(tokenUseur);
+    
+    if (tokenUseur.role=="MANAGER2"||tokenUseur.role=="TEACHER") {
+      localStorage.setItem("user", JSON.stringify({accessToken:token,username:"herilala"}));
+      window.location.href=(ProjectUrl+"/new-event");
+    }
+  }
 
   return (
     <>
@@ -94,15 +106,53 @@ import hei from '../assets/images/hei.png';
 
                       </Form>
 
+                      <Form>
+
+                        <Form.Group className="form-outline mb-4">
+
+                          <Form.Control 
+                            className="form-control"
+                            name="token"  type="text" 
+                            placeholder="Entrer l'Identifiant"  
+                            value={token} 
+                            onChange={(e)=>{setToken(e.target.value)} }
+                          />
+                          <Form.Label className="form-label" 
+                              htmlFor="token" 
+                          >Token</Form.Label>
+                        </Form.Group>
+
+                        <Form.Group className="text-center pt-1 mb-5 pb-1">
+                          <Button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"  
+                          onClick={(e)=>{functionLogToken()}}>
+                            CONNEXION AVEC TOKEN
+                            </Button>
+                        </Form.Group>
+
+                      </Form>
+
                     </div>
                   </div>
                   <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
                     <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                      <h4 className="mb-4">We are more than just a company</h4>
+                      <h4 className="mb-4">0 Vulnérabilité</h4>
                       <p className="small mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Crashtest nous scanne, mais ne trouve rien !
+                      </p>
+                      <h3 className="small mb-0">
+                      {". "}
+                      </h3>
+                      <h4 className="mb-4">250,000,000 Utilisateurs</h4>
+                      <p className="small mb-0">
+                      Onboarder tout Madagascar ? Dix fois sans problème.
+                      </p>
+                      <h3 className="small mb-0">
+                      {". "}
+                      </h3>
+
+                      <h4 className="mb-4">1 Seconde</h4>
+                      <p className="small mb-0">
+                      Pire réponse de notre API au percentile 97.
                       </p>
                     </div>
                   </div>

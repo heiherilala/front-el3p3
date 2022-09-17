@@ -18,8 +18,7 @@ const NewEvent = () => {
                 {name:"",href: (ProjectUrl + "/new-event")}
             )}
 
-
-            <FormulaireAplication changObject={undefined} finishFunction={function (): void {} }  />
+            <TableEvent colloneName={["Nom", "Place", "Represantant", "Type", "Date debut"]} title={'Liste evenment'} delet={false} modif={true} />
             <Footer/>
         </>
     );

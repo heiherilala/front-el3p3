@@ -13,7 +13,8 @@ const NewEvent = () => {
             {NavbarHeader(
                 [
                     {name:"Modifier event",href: (ProjectUrl + "/modify-event")},
-                    {name:"Créé un event",href: (ProjectUrl + "/new-event")}
+                    {name:"Créé un event",href: (ProjectUrl + "/new-event")},
+                    {name:"recognition",href: (ProjectUrl + "/recognition")}
                 ],
                 {name:"",href: (ProjectUrl + "/new-event")}
             )}

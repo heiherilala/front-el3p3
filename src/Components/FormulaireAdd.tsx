@@ -18,7 +18,7 @@ interface props {
 
 
 
-const FormulaireAplication: React.FC<props> = (props) => {
+const FormulaireAdd: React.FC<props> = (props) => {
 
   const [error,setError] = useState("");
   const [errorActiv,setErrorActiv] = useState(false);
@@ -72,7 +72,6 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
   const formik= useFormik({
     initialValues: {
-      idEvent:object1,
       nameEvent: object2,
       dateDebut: object3,
       dateFin: object4,
@@ -86,9 +85,6 @@ const FormulaireAplication: React.FC<props> = (props) => {
       endingMin: object11,
     },
     validationSchema: Yup.object({
-      idEvent: Yup.string()
-      .max(100, "Caractère inferieur ou egale à 100")
-      .required("Requis"),
       nameEvent: Yup.string()
         .max(100, "Caractère inferieur ou egale à 100")
         .required("Requis"),
@@ -135,7 +131,6 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
       
       const objectData = [{
-        id: values.idEvent,
         name:values.nameEvent,
         eventType:values.type=="COURSE"?"COURSE":"EXAMINATION"?"EXAMINATION":"MEETING"?"MEETING":"COURSE",
         place:{id:values.place},
@@ -146,7 +141,9 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
 
       try{
-        postPutDeletRequest("/events",objectData,null,true,false,()=>{setLoadingCheck(false);props.finishFunction()},()=>{setErrorActiv(true)},myToken,setError);
+
+        
+        postPutDeletRequest("/events",objectData,null,false,true,()=>{setLoadingCheck(false);props.finishFunction()},()=>{setErrorActiv(true)},myToken,setError);
         console.log();
         
       } catch (error){};
@@ -173,22 +170,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
               onSubmit={formik.handleSubmit}
               onReset={formik.handleReset}
             >
-              <div className="form-group">
-                <label htmlFor="id" className="label_input">
-                  ID de l'evenment:
-                </label>
-                <input
-                  id="idEvent"
-                  type="text"
-                  className="form-control"
-                  placeholder="Nom complet"
-                  value={formik.values.idEvent}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.idEvent ? (
-                  <p> {formik.errors.idEvent} </p>
-                ) : null}
-              </div>         
+      
               <div className="form-group">
                 <label htmlFor="id" className="label_input">
                   Nom de l'evenment:
@@ -413,4 +395,4 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
 };
 
-export default FormulaireAplication;
+export default FormulaireAdd;

@@ -171,3 +171,116 @@ export const axiosGetWithPage = (
     });
   }
 }
+
+
+export const conection=(
+  endPoint:string, 
+  token:string|undefined,
+  takingData:React.Dispatch<React.SetStateAction<any>>, 
+  functionIfTrue:(()=>void)|null, 
+  functionIfFalse:(()=>void)|null
+)=>{
+
+
+
+  axios(
+    APIUrl+endPoint,
+    {headers: {'Authorization': 'Bearer ' + token}}
+  )
+  .then((response) => {
+
+    takingData(response.data);
+    const timer = setInterval(()=>{
+      if (response.data.role=="MANAGER"||response.data.role=="TEACHER") {
+        localStorage.setItem("user", JSON.stringify({accessToken:token,username:"herilala"}));
+        window.location.href=("/new-event");
+      };
+      clearInterval(timer)
+    },1000)
+
+
+    if (functionIfTrue!=null) {
+      functionIfTrue()
+    }
+  })
+  .catch((error) => {
+    if (functionIfFalse!=null) {
+      functionIfFalse()
+    }
+  });
+
+
+
+}
+
+
+
+
+
+export const postPutDeletRequestArray = (
+  endPoint:string,
+  body:any,
+  id:number|string|null,
+  post:boolean,
+  put:boolean,
+  functionIfTrue:(()=>void)|null, 
+  functionIfFalse:(()=>void)|null,
+  token:string|undefined,
+  changeError:React.Dispatch<React.SetStateAction<string>>|null,
+  )=>{
+    if (token==undefined) {
+      axios[post?"post":put?"put":"delete"](APIUrl+endPoint+(id==null?"":"/"+id), body)
+      .then(
+        (response)=>{
+
+
+          console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+          console.log(response);
+          
+          if (functionIfTrue!=null) {
+            functionIfTrue()
+          }
+          ;
+        
+        
+        
+        }
+      )
+      .catch(
+        (e)=>{
+          console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          if (changeError!=null) {
+            changeError("c'est modifiet")
+          }
+          if (functionIfFalse!=null) {
+            functionIfFalse()
+          }
+        }
+      )
+    }else {
+      axios[post?"post":put?"put":"delete"](APIUrl+endPoint+(id==null?"":"/"+id), body, {headers: {'Authorization': 'Bearer ' + token}})
+      .then(
+        (response)=>{
+          console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+          console.log(response);
+          if (functionIfTrue!=null) {
+            functionIfTrue()
+          }
+          ;}
+      )
+      .catch(
+        
+        (e)=>{
+          console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          console.log(e);
+          if (changeError!=null) {
+            changeError("c'est modifiet")
+          }
+          if (functionIfFalse!=null) {
+            functionIfFalse()
+          }
+        }
+      )
+    }
+
+};

@@ -18,7 +18,7 @@ interface props {
 
 
 
-const FormulaireAplication: React.FC<props> = (props) => {
+const FormulaireModif: React.FC<props> = (props) => {
 
   const [error,setError] = useState("");
   const [errorActiv,setErrorActiv] = useState(false);
@@ -146,7 +146,9 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
 
       try{
-        postPutDeletRequest("/events",objectData,null,true,false,()=>{setLoadingCheck(false);props.finishFunction()},()=>{setErrorActiv(true)},myToken,setError);
+
+        
+        postPutDeletRequest("/events",objectData,null,false,true,()=>{setLoadingCheck(false);props.finishFunction()},()=>{setErrorActiv(true)},myToken,setError);
         console.log();
         
       } catch (error){};
@@ -413,4 +415,4 @@ const FormulaireAplication: React.FC<props> = (props) => {
 
 };
 
-export default FormulaireAplication;
+export default FormulaireModif;

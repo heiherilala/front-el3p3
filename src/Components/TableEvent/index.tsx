@@ -46,8 +46,8 @@ export const TableEvent: React.FC<props> = (props) => {
 
   useEffect(() => {
     setActivLoading(true)
-    //axiosGetWithPage("/events",page,valuNumbur,myToken,setDataList,()=>{setActivLoading(false)},null)
-    axiosGget("/events",myToken,setDataList,()=>{setActivLoading(false)},null)
+    axiosGetWithPage("/events",page,valuNumbur,myToken,setDataList,()=>{setActivLoading(false)},null)
+    //axiosGget("/events",myToken,setDataList,()=>{setActivLoading(false)},null)
   }, [loadDataList,page,valuNumbur,myToken])
 
 

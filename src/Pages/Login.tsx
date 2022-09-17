@@ -10,7 +10,7 @@ import { IUser } from '../interfaces';
 import { Field, useFormik } from "formik";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { axiosGget, login } from '../hoooks';
+import { axiosGget, conection, login } from '../hoooks';
 import hei from '../assets/images/hei.png';
 
 
@@ -46,13 +46,9 @@ import hei from '../assets/images/hei.png';
 
   const functionLogToken = () => {
     
-    axiosGget('/whoami',token,setTokenUsern,()=>{},()=>{})
+    conection('/whoami',token,setTokenUsern,()=>{},()=>{console.log("DISSSSSSSSSSSSSSSSSSSSSSSSSS");
+    })
     console.log(tokenUseur);
-    
-    if (tokenUseur.role=="MANAGER2"||tokenUseur.role=="TEACHER") {
-      localStorage.setItem("user", JSON.stringify({accessToken:token,username:"herilala"}));
-      window.location.href=(ProjectUrl+"/new-event");
-    }
   }
 
   return (

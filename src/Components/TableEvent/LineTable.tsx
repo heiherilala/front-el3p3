@@ -5,7 +5,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { postPutDeletRequest } from '../../hoooks';
 import { event } from '../../interfaces';
 import ConfirmDispo from '../ConfirmDispo';
-import FormulaireAplication from '../FormulaireAdd';
+import FormulaireModif from '../FormulaireAdd';
 import Loading from '../Loading';
 
 
@@ -86,7 +86,7 @@ export const LigneList:React.FC<props> = (props) => {
                 
             {activModifPut?<div className='fonds3'>
                 <Modal show={true} onHide={()=>setActivModifPut(false)}>
-                    <FormulaireAplication changObject={item} finishFunction={()=>{setActivModifPut(false);props.actualisationAllData()}} />
+                    <FormulaireModif changObject={item} finishFunction={()=>{setActivModifPut(false);props.actualisationAllData()}} />
                 </Modal>
             </div>:<></>}
 
